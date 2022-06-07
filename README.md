@@ -1,2 +1,2 @@
 # IDS
-School Project
+School project

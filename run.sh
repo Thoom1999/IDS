@@ -6,7 +6,7 @@ echo "Using go-flows to convert the pcap to a csv"
 echo "Done"
 
 echo "Analysing the csv to detect network attacks"
-python ./main.py output.csv
+python3 -W ignore ./main.py stuff/output.csv stuff/model.pkl
 echo "Done"
 
 echo "Find the result in the output.csv file"

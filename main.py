@@ -27,14 +27,34 @@ def loadData(rawData):
 
 def writeSubmitColumn(rawData, prediction):
     rawData['sublabel'] = prediction
-    rawData.to_csv(sys.argv[1])
+    for index, row in rawData.iterrows():
+        if row['sublabel'] == 1:
+            rawData.loc[index, 'sublabel'] = "Attempted Information Leak"
+        elif row['sublabel'] == 2:
+            rawData.loc[index, 'sublabel'] = "Generic Protocol Command Decode"
+        elif row['sublabel'] == 3:
+            rawData.loc[index, 'sublabel'] = "Misc Attack"
+        elif row['sublabel'] == 4:
+            rawData.loc[index, 'sublabel'] = "Command Decode"
+        elif row['sublabel'] == 5:
+            rawData.loc[index, 'sublabel'] = "Potential Corporate Privacy Violation"
+        elif row['sublabel'] == 6:
+            rawData.loc[index, 'sublabel'] = "Potentially Bad Traffic"
+    rawData.to_csv(sys.argv[1], index=False)
 
 preprocess()
-# rawData = loadRowData()
-# data = loadData(rawData)
-# model = open_model('model.pkl')
-# prediction = predict(model, data)
-# writeSubmitColumn(rawData, prediction)
+print("Loading data")
+rawData = loadRowData()
+data = loadData(rawData)
+print("Done")
+print("Loading model")
+model = open_model(sys.argv[2])
+print("Done")
+print("Predicting")
+prediction = predict(model, data)
+print("Done")
+print("Editing output.csv")
+writeSubmitColumn(rawData, prediction)
+print("Done")
 
-# print(pd.read_csv(sys.argv[1]).head(1000))
 

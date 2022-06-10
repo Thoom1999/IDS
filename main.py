@@ -42,7 +42,7 @@ def writeSubmitColumn(rawData, prediction):
             rawData.loc[index, 'sublabel'] = "Potentially Bad Traffic"
     rawData.to_csv(sys.argv[1], index=False)
 
-preprocess()
+# preprocess()
 print("Loading data")
 rawData = loadRowData()
 data = loadData(rawData)
